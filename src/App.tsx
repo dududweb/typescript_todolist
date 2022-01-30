@@ -4,16 +4,16 @@ import { ITask } from "./Interfaces";
 import TodoTask from "./Component/TodoTask";
 
 const App: FC = () => {
-  const [task, setTask] = useState<string>();
+  const [task, setTask] = useState<string>("");
   const [deadline, setDeadline] = useState<number>(0);
   const [todoList, setTodoList] = useState<ITask[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     if (name === "task") {
-      setTask(event.target.value);
+      setTask(value);
     } else {
-      setDeadline(Number(event.target.value));
+      setDeadline(Number(value));
     }
   };
 
