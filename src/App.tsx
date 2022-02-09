@@ -2,23 +2,15 @@ import { FC, useState, ChangeEvent, useEffect } from "react";
 import "./App.css";
 import { ITask, ITimes } from "./Interfaces";
 import TodoTask from "./Component/TodoTask";
+import Greeting from "./Component/Greeting";
 
 const App: FC = () => {
   const [task, setTask] = useState<string>("");
   const [deadline, setDeadline] = useState<number>(0);
   const [todoList, setTodoList] = useState<ITask[]>([]);
-  const [timer, setTimer] = useState<ITimes>({
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
 
-  const getClock = (): void => {
-    var date = new Date();
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-    setTimer({ hour: hour });
+  const onClick = (name: string) => {
+    console.log(`${name} says hello`);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -45,13 +37,8 @@ const App: FC = () => {
     );
   };
 
-  setInterval(() => {
-    getClock();
-  }, 1000);
-
   return (
     <div className="App">
-      <div className="timer">{timer}</div>
       <div className="header">
         <div className="inputContainer">
           <input
@@ -77,6 +64,7 @@ const App: FC = () => {
             return <TodoTask key={key} task={task} deleteTask={deleteTask} />;
           })}
       </div>
+      <Greeting name="world" mark="!" onClick={onClick} />
     </div>
   );
 };
