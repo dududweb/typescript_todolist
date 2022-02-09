@@ -15,3 +15,7 @@ export interface IGreetings {
   optional?: string;
   onClick: (name: string) => void; //아무것도 리턴하지 않는다를 의미한다 void
 }
+
+export interface IForm {
+  onSubmit: (form: { name: string; description: string }) => void;
+}

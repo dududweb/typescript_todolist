@@ -3,6 +3,7 @@ import "./App.css";
 import { ITask, ITimes } from "./Interfaces";
 import TodoTask from "./Component/TodoTask";
 import Greeting from "./Component/Greeting";
+import Form from "Component/Form";
 
 const App: FC = () => {
   const [task, setTask] = useState<string>("");
@@ -11,6 +12,10 @@ const App: FC = () => {
 
   const onClick = (name: string) => {
     console.log(`${name} says hello`);
+  };
+
+  const onSubmit = (form: { name: string; description: string }) => {
+    console.log(form);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -65,6 +70,7 @@ const App: FC = () => {
           })}
       </div>
       <Greeting name="world" mark="!" onClick={onClick} />
+      <Form onSubmit={onSubmit} />
     </div>
   );
 };
