@@ -4,6 +4,7 @@ import { ITask, ITimes } from "./Interfaces";
 import TodoTask from "./Component/TodoTask";
 import Greeting from "./Component/Greeting";
 import Form from "Component/Form";
+import ReducerSample from "Component/ReducerSample";
 
 const App: FC = () => {
   const [task, setTask] = useState<string>("");
@@ -71,6 +72,7 @@ const App: FC = () => {
       </div>
       <Greeting name="world" mark="!" onClick={onClick} />
       <Form onSubmit={onSubmit} />
+      <ReducerSample />
     </div>
   );
 };
