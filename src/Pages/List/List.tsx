@@ -1,12 +1,9 @@
 import { FC, useState, ChangeEvent, useEffect } from "react";
-import "./App.css";
-import { ITask, ITimes } from "./Interfaces";
-import TodoTask from "./Component/TodoTask";
-import Greeting from "./Component/Greeting";
-import Form from "Component/Form";
-import ReducerSample from "Component/ReducerSample";
+import "./List.css";
+import { ITask, ITimes } from "../../Interfaces";
+import TodoTask from "../../Component/TodoTask";
 
-const App: FC = () => {
+const List: FC = () => {
   const [task, setTask] = useState<string>("");
   const [deadline, setDeadline] = useState<number>(0);
   const [todoList, setTodoList] = useState<ITask[]>([]);
@@ -70,11 +67,8 @@ const App: FC = () => {
             return <TodoTask key={key} task={task} deleteTask={deleteTask} />;
           })}
       </div>
-      <Greeting name="world" mark="!" onClick={onClick} />
-      <Form onSubmit={onSubmit} />
-      <ReducerSample />
     </div>
   );
 };
 
-export default App;
+export default List;
