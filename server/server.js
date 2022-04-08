@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const app = express();
 const MongoClient = require("mongodb").MongoClient;
+require("dotenv").config();
 
 const server = require("http").createServer(app);
 
@@ -13,16 +14,17 @@ app.get("/", (req, res) => {
   res.send({ message: "hello" });
 });
 
+app.get("*", function (req, res) {
+  응답.sendFile(path.join(__dirname, "/react-project/build/index.html"));
+});
+
 var db;
-MongoClient.connect(
-  "mongodb+srv://dududweb:mongodbdududweb12@cluster0.g0su9.mongodb.net/nodes?retryWrites=true&w=majority",
-  function (에러, client) {
-    if (에러) return console.log(에러);
+MongoClient.connect(process.env.DB_URL, function (에러, client) {
+  if (에러) return console.log(에러);
 
-    db = client.db("nodes");
+  db = client.db("nodes");
 
-    server.listen(8080, () => {
-      console.log("server is running on 8080");
-    });
-  }
-);
+  server.listen(8080, () => {
+    console.log("server is running on 8080");
+  });
+});
