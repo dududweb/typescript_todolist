@@ -14,9 +14,9 @@ app.get("/", (req, res) => {
   res.send({ message: "hello" });
 });
 
-app.get("*", function (req, res) {
-  응답.sendFile(path.join(__dirname, "/react-project/build/index.html"));
-});
+// app.get("*", function (req, res) {
+//   응답.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
 
 var db;
 MongoClient.connect(process.env.DB_URL, function (에러, client) {
