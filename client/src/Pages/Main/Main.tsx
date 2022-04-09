@@ -14,7 +14,7 @@ function Main() {
     sendRequest();
   }, []);
 
-  return <div className="main">메인페이지 입니다.</div>;
+  return <div className="main w-50 mx-auto">Hello World</div>;
 }
 
 export default Main;
