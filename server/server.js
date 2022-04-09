@@ -1,22 +1,19 @@
 const express = require("express");
-const path = require("path");
-const cors = require("cors");
 const app = express();
+
 const MongoClient = require("mongodb").MongoClient;
 require("dotenv").config();
-
-const server = require("http").createServer(app);
-
-app.use(cors()); // cors 미들웨어를 삽입합니다.
 
 app.get("/", (req, res) => {
   // 요청패스에 대한 콜백함수를 넣어줍니다.
   res.send({ message: "hello" });
 });
 
-// app.get("*", function (req, res) {
-//   응답.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
+app.get("/api/login", (req, res) => {
+  res.send({ message: "login" });
+});
+
+const port = 8080;
 
 var db;
 MongoClient.connect(process.env.DB_URL, function (에러, client) {
@@ -24,7 +21,7 @@ MongoClient.connect(process.env.DB_URL, function (에러, client) {
 
   db = client.db("nodes");
 
-  server.listen(8080, () => {
-    console.log("server is running on 8080");
+  app.listen(port, () => {
+    console.log(`server is running on ${port}`);
   });
 });
