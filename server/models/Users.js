@@ -1,20 +1,24 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const myPlaintextPassword = "s0//P4$$w0rD";
-const someOtherPlaintextPassword = "not_bacon";
+var jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
   email: {
     type: String,
     trim: true,
     unique: 1,
-    required: true,
   },
   password: {
     type: String,
     minlength: 5,
-    required: true,
+  },
+  token: {
+    type: String,
+  },
+
+  tokenExp: {
+    type: Number,
   },
 });
 
@@ -34,6 +38,26 @@ userSchema.pre("save", function (next) {
     next();
   }
 });
+
+userSchema.methods.comparePassword = function (plainPassword, cb) {
+  //plainpassword랑 비크립트처리한 비밀번호 비교
+  bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
+    if (err) return cb(err), cb(null, isMatch);
+  });
+};
+
+userSchema.methods.generateToken = function (cb) {
+  //jwt 토큰 생성
+  var user = this;
+
+  var token = jwt.sign(user._id.toHexString(), "shhhhh");
+  // user._id + 'secretToken' = token
+  user.token = token;
+  user.save(function (err, user) {
+    if (err) return cb(err);
+    cb(null, user);
+  });
+};
 
 const User = mongoose.model("User", userSchema);
 
