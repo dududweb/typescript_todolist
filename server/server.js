@@ -24,7 +24,7 @@ app.get("/api/login", (req, res) => {
 });
 
 app.post("/api/register", (req, res) => {
-  const user = new User({ email: "ev@@", password: "1234445" });
+  const user = new User({ email: "joodudsdx", password: "123ㅇㄹㅁ" });
   console.log("user>>>", user);
 
   user.save((err, userInfo) => {
