@@ -50,12 +50,26 @@ userSchema.methods.generateToken = function (cb) {
   //jwt 토큰 생성
   var user = this;
 
-  var token = jwt.sign(user._id.toHexString(), "shhhhh");
+  var token = jwt.sign(user._id.toHexString(), "secretToken");
   // user._id + 'secretToken' = token
   user.token = token;
+  console.log(user.token);
   user.save(function (err, user) {
     if (err) return cb(err);
     cb(null, user);
+  });
+};
+
+userSchema.statics.findByToken = function (token, cb) {
+  var user = this;
+  //토큰 디코드
+  jwt.verify(token, "secretToken", function (err, decoded) {
+    //유저 아이디를 이용해서 유저를 찾은다음에
+    //클라이언트에서 가져온 token과 DB에 보관된 토큰이 일치하는지 확인
+    user.findOne({ _id: decoded, token: token }, function (err, user) {
+      if (err) return cb(err);
+      cb(null, user);
+    });
   });
 };
 

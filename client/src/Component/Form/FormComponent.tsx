@@ -3,20 +3,9 @@ import axios from "axios";
 import { Button, Form } from "react-bootstrap";
 
 function FormComponent() {
-  const [data, setData] = useState([]);
-  const sendRequest = async () => {
-    const response = await axios.get("/api/login");
-    console.log(response);
-    console.log(response.data);
-    setData(response.data);
-  };
-
-  useEffect(() => {
-    sendRequest();
-  }, []);
   return (
     <div>
-      <Form className="mx-auto w-50">
+      <Form className="mx-auto w-50" method="POST">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />

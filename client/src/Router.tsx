@@ -4,7 +4,7 @@ import Header from "Component/Header/Header";
 import Main from "./Pages/Main/Main";
 import List from "./Pages/List/List";
 import Login from "./Pages/Login/Login";
-import SignUp from "Pages/SignUp/SignUp";
+import Register from "Pages/Register/Register";
 
 function Router() {
   return (
@@ -14,7 +14,7 @@ function Router() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/list" element={<List />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
